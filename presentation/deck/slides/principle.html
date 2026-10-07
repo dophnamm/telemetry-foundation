@@ -1,0 +1,41 @@
+<section id="principle" data-transition="fade" style="background:#F8F9F9;color:#0C121D;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px">
+<p style="position:absolute;left:128px;top:128px;width:1664px;font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1854C3">Design choice</p>
+<h2 style="position:absolute;left:128px;top:166px;width:1664px;font-size:64px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#0C121D">Why the logic lives in the agent</h2>
+<p style="position:absolute;left:128px;top:246px;width:1664px;font-size:24px;color:#607497">Same application crash, two outcomes. Option A costs one Collector component written in Go.</p>
+<!-- PANEL-B 128,300,800,600  PANEL-A 992,300,800,600  B-APP 168,380,720,210  B-COL 168,670,720,170  A-APP 1032,380,720,210  A-AGENT 1032,670,720,170 -->
+<div style="position:absolute;left:128px;top:300px;width:800px;height:600px;display:flex;flex-direction:column;background:#FFFFFF;border:2px solid #DEE0E4;border-radius:16px;padding:24px 40px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#607497">Option B · thick SDK · rejected</p>
+</div>
+<div style="position:absolute;left:992px;top:300px;width:800px;height:600px;display:flex;flex-direction:column;background:#E8F0FF;border:2px solid #1D6BFC;border-radius:16px;padding:24px 40px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1854C3">Option A · logic in the agent · chosen</p>
+</div>
+<div style="position:absolute;left:168px;top:380px;width:720px;height:210px;display:flex;flex-direction:column;gap:8px;background:#F8F9F9;border:2px solid #DEE0E4;border-radius:12px;padding:20px 24px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Application</p>
+<p style="font-size:24px;color:#344565">SDK holds the buffer, filter and OCSF logic</p>
+<p style="font-size:24px;color:#344565">Built 6 times: Go, C++, Rust, Java, .NET, Node.js</p>
+<p style="font-size:24px;font-weight:600;color:#D40031">Crash: debug buffer is lost with the process</p>
+</div>
+<div style="position:absolute;left:168px;top:670px;width:720px;height:170px;display:flex;flex-direction:column;gap:8px;background:#F8F9F9;border:2px solid #DEE0E4;border-radius:12px;padding:20px 24px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Collector</p>
+<p style="font-size:24px;color:#344565">Only forwards what it receives</p>
+</div>
+<div style="position:absolute;left:1032px;top:380px;width:720px;height:210px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:2px solid #A5C4FE;border-radius:12px;padding:20px 24px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Application</p>
+<p style="font-size:24px;color:#344565">Thin SDK: configure and emit</p>
+<p style="font-size:24px;color:#344565">Generated code, no wrappers around OTel</p>
+</div>
+<div style="position:absolute;left:1032px;top:670px;width:720px;height:170px;display:flex;flex-direction:column;gap:8px;background:#0D2654;border-radius:12px;padding:20px 24px;box-shadow:0 4px 12px rgba(12,18,29,0.10)">
+<p style="font-size:28px;font-weight:600;color:#FFFFFF">Agent on the node</p>
+<p style="font-size:24px;color:#C6DAFE">Buffer, filter and OCSF logic, built once in Go</p>
+<p style="font-size:24px;font-weight:600;color:#00FFB2">Crash: buffer survives on the node disk</p>
+</div>
+<x-connector x1="528" y1="590" x2="528" y2="670" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="1392" y1="590" x2="1392" y2="670" style="color:#1D6BFC;border-width:3px"></x-connector>
+<p style="position:absolute;left:544px;top:614px;width:120px;font-size:24px;font-weight:600;color:#1854C3">OTLP</p>
+<p style="position:absolute;left:1408px;top:614px;width:120px;font-size:24px;font-weight:600;color:#1854C3">OTLP</p>
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;justify-content:space-between">
+<p style="font-size:24px;color:#607497">Telemetry Foundation</p>
+<p style="font-size:24px;color:#607497">07</p>
+</div>
+<aside>This is the one design decision everything else follows from. On the left, option B: every language's SDK carries the buffer, the log-level filter and the OCSF logic. That means building and keeping six implementations in sync, and when the application crashes, the debug buffer dies with the process, which is exactly the moment we need it. On the right, option A, which we chose: the SDK stays thin and only configures and emits, using generated code rather than wrappers, as OpenTelemetry itself recommends. The agent on the node holds the buffer and the logic, written once in Go, and the buffer survives an application crash because it lives on the node's disk. One known gap: records still queued inside the SDK at the instant of a crash can be lost on the OTLP path; we flush on fatal errors and will measure the gap.</aside>
+</section>

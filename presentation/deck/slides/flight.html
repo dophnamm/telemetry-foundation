@@ -1,0 +1,36 @@
+<section id="flight" data-transition="fade" style="background:#F8F9F9;color:#0C121D;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px">
+<p style="position:absolute;left:128px;top:128px;width:1664px;font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1854C3">Flight recorder</p>
+<h2 style="position:absolute;left:128px;top:166px;width:1664px;font-size:64px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#0C121D">15 minutes of debug context, always</h2>
+<p style="position:absolute;left:128px;top:246px;width:1664px;font-size:24px;color:#607497">A rolling window on every node. An error freezes it before the context rolls off.</p>
+<!-- OLD 128,420,640,130  WINDOW 800,420,700,130  RAIL y=580 x128-1784  MARK 1488,568,24,24  SNAP 800,690,700,220  PKG 1560,690,232,220 -->
+<p style="position:absolute;left:800px;top:372px;width:700px;font-size:24px;color:#344565">Stored per service, per minute, shared fairly</p>
+<div style="position:absolute;left:128px;top:420px;width:640px;height:130px;display:flex;flex-direction:column;gap:4px;background:#EBECEE;border-radius:12px;padding:20px 28px">
+<p style="font-size:28px;font-weight:600;color:#607497">Older than 15 minutes</p>
+<p style="font-size:24px;color:#607497">Deleted automatically</p>
+</div>
+<div style="position:absolute;left:800px;top:420px;width:700px;height:130px;display:flex;flex-direction:column;gap:4px;background:#E8F0FF;border:2px solid #1D6BFC;border-radius:12px;padding:20px 28px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Rolling window · last 15 minutes</p>
+<p style="font-size:24px;color:#344565">DEBUG from every service · up to 2 GiB per node</p>
+</div>
+<div style="position:absolute;left:800px;top:690px;width:700px;height:220px;display:flex;flex-direction:column;gap:8px;background:#0D2654;border-radius:12px;padding:24px 28px;box-shadow:0 4px 12px rgba(12,18,29,0.10)">
+<p style="font-size:28px;font-weight:600;color:#FFFFFF">Snapshot · kept 24 hours</p>
+<p style="font-size:24px;line-height:1.35;color:#C6DAFE">Frozen copy of the window, hard-linked so nothing is copied twice</p>
+</div>
+<div style="position:absolute;left:1560px;top:690px;width:232px;height:220px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:2px solid #A5C4FE;border-radius:12px;padding:20px 20px">
+<p style="font-size:28px;font-weight:600;line-height:1.2;color:#0C121D">Support package</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Via authenticated API, PII masked</p>
+</div>
+<x-connector x1="128" y1="580" x2="1784" y2="580" style="color:#A9B2C4;border-width:4px"></x-connector>
+<x-shape kind="ellipse" style="position:absolute;left:1488px;top:568px;width:24px;height:24px;background:#D40031"></x-shape>
+<x-connector x1="1150" y1="550" x2="1150" y2="690" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="1500" y1="800" x2="1560" y2="800" style="color:#1D6BFC;border-width:3px"></x-connector>
+<p style="position:absolute;left:720px;top:600px;width:160px;font-size:24px;color:#344565;text-align:center">T − 15 min</p>
+<p style="position:absolute;left:1166px;top:600px;width:200px;font-size:24px;line-height:1.3;color:#1854C3;font-weight:600">Freeze 10 s after the error</p>
+<p style="position:absolute;left:1380px;top:600px;width:280px;font-size:24px;line-height:1.3;color:#D40031;font-weight:600;text-align:center">Incident: FATAL or error spike</p>
+<p style="position:absolute;left:1690px;top:600px;width:100px;font-size:24px;color:#607497;text-align:right">time</p>
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;justify-content:space-between">
+<p style="font-size:24px;color:#607497">Telemetry Foundation</p>
+<p style="font-size:24px;color:#607497">09</p>
+</div>
+<aside>Read this left to right along the time line. Every service always logs at DEBUG, and the agent on each node keeps exactly the last 15 minutes, stored per service and per minute, capped at 2 GiB per node and shared fairly so one noisy service cannot shrink everyone else's window. Anything older is deleted automatically. When a service logs a FATAL error or its errors spike, marked in red, the agent waits ten seconds to capture what happens right after, then freezes the window into a snapshot kept for 24 hours. The snapshot uses hard links, so nothing is copied twice. A support package created later, even an hour after the incident, still contains the debug context from before it. It is pulled through an authenticated API and personal data is masked before it leaves the site. Other vendors ask customers to turn on debug and wait for the failure to happen again; we skip that round trip.</aside>
+</section>

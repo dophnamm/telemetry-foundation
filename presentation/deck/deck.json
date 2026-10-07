@@ -1,0 +1,19 @@
+{
+  "v": 4,
+  "createdOnFiles": { "v": 1, "at": "2026-10-07T16:40:00Z" },
+  "lists": "css",
+  "title": "Telemetry Foundation Design",
+  "cover": "cover",
+  "order": ["cover", "problem", "scope", "constraints", "architecture", "dataflow", "principle", "blocks", "flight", "control"],
+  "sections": {
+    "s1": { "description": "Why the new platform needs one telemetry standard", "start": "cover" },
+    "s2": { "description": "System architecture, data flow and the five Foundation building blocks", "start": "architecture" }
+  },
+  "faces": {
+    "dm-sans": { "family": "DM Sans", "href": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&display=swap" },
+    "jetbrains-mono": { "family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..700&display=swap" }
+  },
+  "designSystems": [
+    { "title": "OPSWAT Design System", "namespace": "opswat", "artifact": "https://claude.ai/artifact/N3RpkFFoDeWYgHQLusnq8y", "version": "1791342921-c5ad", "copiedAt": "2026-10-07T16:40:00Z" }
+  ]
+}

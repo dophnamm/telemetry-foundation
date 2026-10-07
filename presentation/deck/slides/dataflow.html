@@ -1,0 +1,73 @@
+<section id="dataflow" data-transition="fade" style="background:#F8F9F9;color:#0C121D;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px">
+<p style="position:absolute;left:128px;top:128px;width:1664px;font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#1854C3">Data flow</p>
+<h2 style="position:absolute;left:128px;top:166px;width:1664px;font-size:64px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#0C121D">How telemetry moves inside one cluster</h2>
+<p style="position:absolute;left:128px;top:246px;width:1664px;font-size:24px;color:#607497">Blue: logs, metrics and traces. Teal: OCSF security events. Dashed: on demand only.</p>
+<!-- APP 128,360,260,470  AGENT 568,300,408,560  REC 592,360,360,140  FILT 592,530,360,140  OCSF 592,700,360,140  DIAG 1150,300,250,140  GW 1150,500,250,330  PKG 1488,300,304,140  LOCAL 1488,500,304,100  HUB 1488,630,304,100  SIEM 1488,760,304,100 -->
+<div style="position:absolute;left:128px;top:360px;width:260px;height:470px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:2px solid #A5C4FE;border-radius:12px;padding:20px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Applications</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">OTel SDK in 6 languages</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Always logs at DEBUG</p>
+</div>
+<div style="position:absolute;left:568px;top:300px;width:408px;height:560px;display:flex;flex-direction:column;background:#0D2654;border-radius:12px;padding:16px 24px;box-shadow:0 4px 12px rgba(12,18,29,0.10)">
+<p style="font-size:24px;font-weight:600;color:#02E9F5">Agent on every node</p>
+</div>
+<div style="position:absolute;left:592px;top:360px;width:360px;height:140px;display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border-radius:8px;padding:16px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Flight recorder</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Keeps 15 min on node disk</p>
+</div>
+<div style="position:absolute;left:592px;top:530px;width:360px;height:140px;display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border-radius:8px;padding:16px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Log-level filter</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Per service, per logger</p>
+</div>
+<div style="position:absolute;left:592px;top:700px;width:360px;height:140px;display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border-radius:8px;padding:16px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">OCSF lane</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Own queue, never filtered</p>
+</div>
+<div style="position:absolute;left:1150px;top:300px;width:250px;height:140px;display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:2px dashed #A9B2C4;border-radius:12px;padding:16px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Diagnostics</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Builds support packages</p>
+</div>
+<div style="position:absolute;left:1150px;top:500px;width:250px;height:330px;display:flex;flex-direction:column;gap:8px;background:#FFFFFF;border:2px solid #A5C4FE;border-radius:12px;padding:20px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Gateway</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">One per cluster</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Masks PII when data leaves the site</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">Routes by mode</p>
+</div>
+<div style="position:absolute;left:1488px;top:300px;width:304px;height:140px;display:flex;flex-direction:column;gap:4px;background:#FFFFFF;border:2px dashed #A9B2C4;border-radius:12px;padding:16px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Support package</p>
+<p style="font-size:24px;line-height:1.3;color:#344565">To OPSWAT or a shared folder</p>
+</div>
+<div style="position:absolute;left:1488px;top:500px;width:304px;height:100px;display:flex;flex-direction:column;gap:2px;background:#FFFFFF;border:2px solid #DEE0E4;border-radius:12px;padding:12px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Local backend</p>
+<p style="font-size:24px;color:#344565">With UI · standalone</p>
+</div>
+<div style="position:absolute;left:1488px;top:630px;width:304px;height:100px;display:flex;flex-direction:column;gap:2px;background:#FFFFFF;border:2px solid #DEE0E4;border-radius:12px;padding:12px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">OPSWAT hub</p>
+<p style="font-size:24px;color:#344565">Hub mode</p>
+</div>
+<div style="position:absolute;left:1488px;top:760px;width:304px;height:100px;display:flex;flex-direction:column;gap:2px;background:#FFFFFF;border:2px solid #DEE0E4;border-radius:12px;padding:12px 20px">
+<p style="font-size:28px;font-weight:600;color:#0C121D">Customer SIEM</p>
+<p style="font-size:24px;color:#344565">OCSF events</p>
+</div>
+<x-connector x1="388" y1="430" x2="592" y2="430" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="388" y1="600" x2="592" y2="600" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="388" y1="770" x2="592" y2="770" style="color:#02A3AC;border-width:3px"></x-connector>
+<x-connector x1="952" y1="430" x2="1150" y2="430" style="color:#607497;border-width:3px;border-style:dashed"></x-connector>
+<x-connector x1="952" y1="600" x2="1150" y2="600" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="952" y1="770" x2="1150" y2="770" style="color:#02A3AC;border-width:3px"></x-connector>
+<x-connector x1="1400" y1="370" x2="1488" y2="370" style="color:#607497;border-width:3px;border-style:dashed"></x-connector>
+<x-connector x1="1400" y1="550" x2="1488" y2="550" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="1400" y1="680" x2="1488" y2="680" style="color:#1D6BFC;border-width:3px"></x-connector>
+<x-connector x1="1400" y1="810" x2="1488" y2="810" style="color:#02A3AC;border-width:3px"></x-connector>
+<p style="position:absolute;left:404px;top:391px;width:150px;font-size:24px;color:#344565">All logs</p>
+<p style="position:absolute;left:404px;top:499px;width:150px;font-size:24px;line-height:1.3;color:#344565">Logs, metrics, traces</p>
+<p style="position:absolute;left:404px;top:700px;width:150px;font-size:24px;line-height:1.3;color:#016065">OCSF events</p>
+<p style="position:absolute;left:984px;top:391px;width:150px;font-size:24px;color:#344565">On demand</p>
+<p style="position:absolute;left:984px;top:530px;width:150px;font-size:24px;line-height:1.3;color:#344565">Filtered by level</p>
+<p style="position:absolute;left:984px;top:731px;width:150px;font-size:24px;color:#016065">All events</p>
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;justify-content:space-between">
+<p style="font-size:24px;color:#607497">Telemetry Foundation</p>
+<p style="font-size:24px;color:#607497">06</p>
+</div>
+<aside>Inside one cluster, every application sends three lanes to the agent on its node. Lane one: all logs, including DEBUG, go into the flight recorder, which keeps the last 15 minutes on the node's disk and nothing else; it only leaves the node when the diagnostics service builds a support package on demand. Lane two: logs, metrics and traces pass the log-level filter, so only the levels an admin selected go on to the gateway. Lane three: OCSF security events travel on their own port and durable queue and are never filtered or sampled. The gateway masks personal data when anything leaves the site and routes by mode: to the local backend in standalone mode, to the OPSWAT hub in hub mode, and OCSF events to the customer's SIEM. The navy box, the agent, is where most of the Foundation logic lives.</aside>
+</section>
